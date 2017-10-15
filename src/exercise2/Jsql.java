@@ -11,11 +11,11 @@ public class Jsql {
 	         Class.forName("org.postgresql.Driver");
 	         c = DriverManager
 	            .getConnection("jdbc:postgresql://localhost:5432/Database",
-	            "postgres", "123");
+	            "albert", "123");
 	         System.out.println("Opened database successfully");
 	         stmt = c.createStatement();
 	         System.out.println("Dropping previous table...");
-	         String sql ="DROP TABLE ASSIGNMENT";
+	         String sql ="DROP TABLE IF EXISTS ASSIGNMENT";
 		     stmt.executeUpdate(sql);
 		     System.out.println("Table dropped succesfully" + "\n Creating new table...");
 	         sql = "CREATE TABLE ASSIGNMENT " +
@@ -42,7 +42,7 @@ public class Jsql {
 	}
 	
 	public static void insertNames(Statement stmt) throws Exception{
-		int number = 1000000;
+		int number = 200000;
 		Randomnames rand = new Randomnames(number);
 		int johnid = 185465;
 		List<String> list = rand.getNames();
@@ -56,6 +56,9 @@ public class Jsql {
 				i++;
 					stmt.executeUpdate(sql + "(" + (i) + ",'"+s+"');");
 			}
+			if (i%2000==0) {
+                System.out.println(((float)i)/number*100+"%");
+            }
 		}
 	}
 	
