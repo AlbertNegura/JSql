@@ -42,7 +42,7 @@ public class Jsql {
 	}
 	
 	public static void insertNames(Statement stmt) throws Exception{
-		int number = 200000;
+		int number = 1000000;
 		Randomnames rand = new Randomnames(number);
 		int johnid = 185465;
 		List<String> list = rand.getNames();
